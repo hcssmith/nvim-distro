@@ -2,9 +2,14 @@ M = {}
 
 local loader = require('modules.base.loader')
 
+local t_opts = {silent = true}
+
 M.keymap = {
     insert = {
       {"jk", "<Esc>"}
+    },
+    terminal = {
+      {"jk", "<C-\\><C-N>"}
     },
     normal = {
       {"<C-h>", "<C-W><C-h>"},

@@ -1,4 +1,4 @@
-local base_dir = "~/Projects/distro"
+local base_dir = "~/.config/nvim"
 
 if not vim.tbl_contains(vim.opt.rtp:get(), base_dir) then
   vim.opt.rtp:prepend(base_dir)

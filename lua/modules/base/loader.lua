@@ -26,7 +26,8 @@ function M:SetKeymaps(keymap_tbl, bufnr)
   local modes = {
     { "insert","i"},
     { "normal","n"},
-    { "visual","v"}
+    { "visual","v"},
+    { "terminal","t"}
   }
   for _, v in ipairs(modes) do
     if keymap_tbl[v[1]] ~= nil then
