@@ -60,10 +60,10 @@ function M:settings()
       {"<leader>vca", vim.lsp.buf.code_action, lsp_opts},
       {"<leader>vrr", vim.lsp.buf.references, lsp_opts},
       {"<leader>vrn", vim.lsp.buf.rename, lsp_opts},
-      {"<leader>pd", ":Lspsaga peek_definition<CR>", lsp_opts},
-      {"<leader>ca", ":Lspsaga code_action<CR>", lsp_opts},
-      {"<leader>o", ":Lspsaga outline<CR>", lsp_opts},
-      {"K", ":Lspsaga hover_doc<CR>", lsp_opts}
+      {"<leader>pd", function () require('lspsaga.definition'):init(1, 1) end, lsp_opts},
+      {"<leader>ca", function () require('lspsaga.codeaction'):code_action() end, lsp_opts},
+      {"<leader>o", function () require('lspsaga.symbol'):outline() end, lsp_opts},
+      {"K", function () require('lspsaga.hover'):render_hover_doc() end, lsp_opts}
     },
     insert = {
       {"<C-h>", vim.lsp.buf.signature_help, lsp_opts}

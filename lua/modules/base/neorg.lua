@@ -4,26 +4,6 @@ M = {}
 
 local loader = require('modules.base.loader')
 
-local keymap = {
-    normal = {
-      {"<localleader>nd", ":Neorg keybind norg core.qol.todo_items.todo.task_done<CR>"},
-      {"<localleader>nc", ":Neorg keybind norg core.qol.todo_items.todo.task_cycle<CR>"},
-      {"<localleader>nh", ":Neorg keybind norg core.qol.todo_items.todo.task_on_hold<CR>"},
-      {"<localleader>nr", ":Neorg keybind norg core.qol.todo_items.todo.task_recurring<CR>"},
-      {"<localleader>lt", ":Neorg keybind norg core.pivot.toggle-list-type<CR>"}
-    }
-}
-
-local function setup_neorg_bindings()
-  vim.api.nvim_create_autocmd('FileType', {
-	  desc = 'Setup neorg keybinds in neorg buffer only',
-	  pattern = 'norg',
-	  callback = function ()
-      loader.SetKeymaps(loader, keymap, 0)
-   end
-  })
-end
-
 local function notes_dir()
   local path = ""
   if loader.Opts.OneDrive  == nil then
@@ -40,17 +20,27 @@ M.lazy = {
     dependencies = { "nvim-lua/plenary.nvim" },
     cond = HasCCompiler,
     config = function()
-      setup_neorg_bindings()
       require("neorg").setup {
         load = {
           ["core.defaults"] = {}, -- Loads default behaviour
           ["core.concealer"] = {}, -- Adds pretty icons to your documents
           ["core.itero"] = {},
           ["core.promo"] = {},
+          ["core.keybinds"] = {
+            config = {
+              hook = function(keybinds)
+                keybinds.remap_event('norg', 'n', keybinds.leader .. 'nd', 'core.qol.todo_items.todo.task_done')
+                keybinds.remap_event('norg', 'n', keybinds.leader .. 'nc', 'core.qol.todo_items.todo.task_cycle')
+                keybinds.remap_event('norg', 'n', keybinds.leader .. 'nh', 'core.qol.todo_items.todo.task_on_hold')
+                keybinds.remap_event('norg', 'n', keybinds.leader .. 'nr', 'core.qol.todo_items.todo.task_recurring')
+                keybinds.remap_event('norg', 'n', keybinds.leader .. 'lt', 'core.pivot.toggle-list-type')
+              end
+            }
+          },
           ["core.dirman"] = { -- Manages Neorg workspaces
             config = {
               workspaces = {
-               notes = notes_dir(),
+                notes = notes_dir(),
               },
               default_workspace = "notes"
             },

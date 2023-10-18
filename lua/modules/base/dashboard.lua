@@ -14,32 +14,6 @@ local function footer()
   end
 end
 
-local function config_files()
-  local cwd = vim.fn.stdpath "config" .. "/"
-  local config_dir = { cwd }
-
-  require("telescope.builtin").find_files {
-    prompt_title = "Config Files",
-    search_dirs = config_dir,
-    cwd = cwd,
-  }
-end
-
-
-local function new_file()
-  local fname = vim.fn.input("File: ", "", "file")
-  if fname == "" then return end
-  vim.cmd("e " .. fname)
-end
-
-local function serach_notes()
-  require('telescope').extensions.live_grep_args.live_grep_args({
-    search_dirs = {
-      loader.Opts.NotesDir
-    }
-  })
-end
-
 local function launch_dashboard()
   require('nvim-tree.api').tree.close()
   vim.cmd(":Dashboard")
@@ -68,7 +42,11 @@ M.lazy = {
           key = 'n',
           keymap = '\':e\'',
           key_hl = 'Number',
-          action = function() new_file() end
+          action = function()
+            local fname = vim.fn.input("File: ", "", "file")
+            if fname == "" then return end
+            vim.cmd("e " .. fname)
+          end
         },
         {
           icon = ' ',
@@ -88,7 +66,14 @@ M.lazy = {
           key = 's',
           keymap = '',
           key_hl = 'Number',
-          action = function() serach_notes() end
+          action = function()
+            local l = require('modules.base.loader')
+            require('telescope').extensions.live_grep_args.live_grep_args({
+              search_dirs = {
+                l.Opts.NotesDir
+              }
+            })
+          end
         },
         {
           icon = ' ',
@@ -108,7 +93,16 @@ M.lazy = {
           key = 'c',
           keymap = '',
           key_hl = 'Number',
-          action = function() config_files() end
+          action = function()
+            local cwd = vim.fn.stdpath "config" .. "/"
+            local config_dir = { cwd }
+
+            require("telescope.builtin").find_files {
+              prompt_title = "Config Files",
+              search_dirs = config_dir,
+              cwd = cwd,
+            }
+          end
         },
         {
           icon = '󰚰 ',

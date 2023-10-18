@@ -2,7 +2,6 @@
     "workspace.library": [
         "/home/hcssmith/.local/share/nvim/lazy/neodev.nvim/types/nightly",
         "/usr/local/share/nvim/runtime/lua",
-        "/home/hcssmith/Projects/distro/lua",
         "${3rd}/luv/library"
     ]
 }

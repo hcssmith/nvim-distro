@@ -1,8 +1,12 @@
 M = {}
 
+
 M.keymap = {
     normal = {
-      {'<leader>e', ':NvimTreeFindFileToggle<CR>'}
+      {'<leader>e', function ()
+	local api = require('nvim-tree.api')
+        api.tree.toggle()
+      end}
     }
 }
 
