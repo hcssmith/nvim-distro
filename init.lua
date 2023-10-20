@@ -7,7 +7,7 @@ end
 local mtl = {
   'modules.opt.dracula',
   'modules.opt.gitsigns',
-  'modules.opt.nvimtree',
+  'modules.opt.nvimsidebar',
   'modules.opt.vimtex',
   'modules.opt.ufo',
   'modules.opt.noice'
