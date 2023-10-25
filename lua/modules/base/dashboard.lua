@@ -15,7 +15,7 @@ local function footer()
 end
 
 local function launch_dashboard()
-  require('nvim-tree.api').tree.close()
+  --require('nvim-tree.api').tree.close()
   vim.cmd(":Dashboard")
 end
 
