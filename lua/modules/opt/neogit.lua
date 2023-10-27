@@ -1,6 +1,12 @@
 
 M = {}
 
+M.Keymaps = {
+  normal = {
+    {"<leader>ng", function () require('neogit').open() end}
+  }
+}
+
 M.lazy = {
   "NeogitOrg/neogit",
   dependencies = {
