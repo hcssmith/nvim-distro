@@ -1,7 +1,7 @@
 
 M = {}
 
-M.Keymaps = {
+M.keymap = {
   normal = {
     {"<leader>ng", function () require('neogit').open() end}
   }
