@@ -23,6 +23,7 @@ M.lazy = {
     },
     config = function ()
       require('telescope').load_extension('live_grep_args')
+      require("telescope").load_extension("git_worktree")
       require('telescope').setup({
 
       pickers = {
