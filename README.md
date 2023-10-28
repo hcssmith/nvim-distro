@@ -74,6 +74,23 @@ issues with scope. I may be able to work arround this with proper requires, but
 I have not yet tried this.
 
 #### modules.base.loader
+This is the core module that loads other modules, and applies keymaps and
+settings. There are 3 functions in this module to be aware of, `Load`,
+`SetKeymap` and `ApplySettings`
 
+##### Load
+Pass this function the path of a module, it will check if any keymaps are
+definined, if they are it adds them to a table, likewise for settings and the
+lazy plugin definition.
+
+##### SetKeymap
+`SetKeymap` runs through all fields in the table searching based on a defined
+set of modes, any new modes required can be added in the modes table (longname,
+keycode). Also passed to this function is an optional bufnr to apply keymaps to
+secific buffers only.
+
+##### ApplySettings
+This runs all module settings functions and then applys any keymaps definied in
+the module.
 
 
