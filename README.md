@@ -30,7 +30,7 @@ If this is in base, add the module string to the list in
 lua/setup/init.lua:base_modules otherwise it will need to be 
 added into the list in init.lua to be passed to the setup function.
 
-# setup
+## setup
 The setup:init() function takes in a table of globaly availble modules and a list of optional modules to load, the module must be in the include path somewhere. As part of this function we set various settings, some of which are controlled by the globals defined in setup.vars and overwritten by the table passed to setup:init()
 
 ### Steps in order
@@ -45,3 +45,35 @@ The setup:init() function takes in a table of globaly availble modules and a lis
 9. Install all modules
 10. Apply all module settings (M.settings())
 11. Apply general settings
+
+## Modules
+Description of all modules in the config
+
+### Base Modules
+
+#### modules.lazy
+This module loads the lazy.nvim plugin manager (M:Init()) this adds in the lazy
+installation path, checks if lazy is installed there and if it is not, it calls
+git in order to install lazy.nvim to the lazy installation path.
+
+We also have two helper functions to register a module into the plugin list
+(M:RegisterModule(module)) and to then run lazyvim against the plugin list;
+(M:Run(opts))
+
+#### modules.base
+This module contains the basic keymaps such as `jk` for escape and `C-Left /
+Right` for movement. 
+
+#### modules.base.dashboard
+This loads the dashboard plugin, which is the landing page for `nvim` with no
+file / path specified, I have keybinds on here to update plugins search config
+files, search notes files, and open the Neorg notes. Menu entries are definied
+in the lazy plugin specification. I have found that the menu action functions
+are best setup in the lazy definition rather than as separate functions due to
+issues with scope. I may be able to work arround this with proper requires, but
+I have not yet tried this.
+
+#### modules.base.loader
+
+
+
