@@ -12,7 +12,8 @@ local mtl = {
   'modules.opt.nvimtree',
   'modules.opt.vimtex',
   'modules.opt.ufo',
-  'modules.opt.noice'
+  'modules.opt.noice',
+  'modules.opt.harpoon'
 }
 
 require('setup'):init(nil, mtl)
