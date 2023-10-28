@@ -3,11 +3,11 @@ M = {}
 
 M.keymap = {
   normal = {
-    {'<leader>hl', require("harpoon.ui").toggle_quick_menu() },
-    {'<leader>hm', require("harpoon.mark").add_file() },
-    {'<leader>h1', require("harpoon.ui").nav_file(1) },
-    {'<leader>h2', require("harpoon.ui").nav_file(2) },
-    {'<leader>h3', require("harpoon.ui").nav_file(3) }
+    {'<leader>hl', function () require("harpoon.ui").toggle_quick_menu() end },
+    {'<leader>hm', function () require("harpoon.mark").add_file() end},
+    {'<leader>h1', function () require("harpoon.ui").nav_file(1) end},
+    {'<leader>h2', function () require("harpoon.ui").nav_file(2) end},
+    {'<leader>h3', function () require("harpoon.ui").nav_file(3) end}
   }
 }
 
