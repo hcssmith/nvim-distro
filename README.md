@@ -92,5 +92,3 @@ secific buffers only.
 ##### ApplySettings
 This runs all module settings functions and then applys any keymaps definied in
 the module.
-
-
