@@ -92,3 +92,17 @@ secific buffers only.
 ##### ApplySettings
 This runs all module settings functions and then applys any keymaps definied in
 the module.
+
+#### modules.base.lsp
+This sets up the LSP environment, and the various required plugins. Aside from
+the standard lazy / keymaps & settings we also define two functions to check if
+a buffer has a LSP client running `LspActive` & `LspInactive`. There is nothing
+special in the lazy definition, just the recommneded parts from the Lsp-Zero
+plugin. In settings we configure keymaps on a buffer basis, only applying once
+the LSP is started, there is also some configuraiton done to install Lsp clients
+and completion key bindings
+
+#### modules.base.lspsaga
+This provides several useful features to compliment the usage of LSP, I have
+used the breadcrumbs in the satus bar as well as Hover & show definition with
+the keymaps being set in `modules.base.lsp`
