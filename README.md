@@ -106,3 +106,5 @@ and completion key bindings
 This provides several useful features to compliment the usage of LSP, I have
 used the breadcrumbs in the satus bar as well as Hover & show definition with
 the keymaps being set in `modules.base.lsp`
+
+#### modules.base.lualine
