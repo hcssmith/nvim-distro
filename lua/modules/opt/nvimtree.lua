@@ -10,6 +10,10 @@ M.keymap = {
     }
 }
 
+function M.settings()
+  vim.highlight.create('NvimTreeNormal', {guibg='none'})
+end
+
 M.lazy = {
     'nvim-tree/nvim-tree.lua',
     dependencies = {
