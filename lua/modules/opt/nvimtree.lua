@@ -11,7 +11,8 @@ M.keymap = {
 }
 
 function M.settings()
-  vim.highlight.create('NvimTreeNormal', {guibg='none'})
+  --vim.highlight.create('NvimTreeNormal', {guibg='none'})
+  vim.api.nvim_set_hl(0, 'NvimTreeNormal', {guibg='none'})
 end
 
 M.lazy = {
