@@ -108,3 +108,5 @@ used the breadcrumbs in the satus bar as well as Hover & show definition with
 the keymaps being set in `modules.base.lsp`
 
 #### modules.base.lualine
+I have modified the default lualine confif to have the LSP breadcrumbs from
+lspsaga dsipalyed if an LSP is loaded else it displays the filename. 
