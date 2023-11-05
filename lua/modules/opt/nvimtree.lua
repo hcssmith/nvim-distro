@@ -10,6 +10,10 @@ M.keymap = {
     }
 }
 
+function M.settings()
+  vim.api.nvim_set_hl(0, 'NvimTreeNormal', {bg='none'})
+end
+
 M.lazy = {
     'nvim-tree/nvim-tree.lua',
     dependencies = {
