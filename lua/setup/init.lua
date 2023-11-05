@@ -81,9 +81,10 @@ function M:init(opts, modules_to_load)
 
   lazy:Run(opts)
 
+  general_settings(opts)
+  
   loader:ApplySettings()
 
-  general_settings(opts)
 end
 
 
