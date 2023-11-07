@@ -127,3 +127,37 @@ This is the main module that provides syntax highliting via parsing the AST. I
 have disabled this for Makefiles as I dislike the syntax highlighting provided
 for this.
 
+#### modules.opt.dracula
+Dracula colour scheme, itallic comments set to true.
+
+#### modules.opt.gitsigns
+Git changes in the gutter, no other changes.
+
+#### modules.opt.gitworktree
+For managing worktree based workflows, a couple of keybinds and some hooks to
+indicate what was done in a message.
+
+#### modules.opt.markdownpreview
+Preview markdown in a webbrowser. Keybind to launch.
+
+#### modules.opt.noice
+Fancy UI for neovim, notifications in popups, command line in popupi window, no
+command line at the bottom.
+
+#### modules.opt.nordic
+Nordic colourscheme
+
+#### modules.opt.nvimsidebar
+Neovim sidebar with the following modules, git, files, todos, buffers.
+
+#### modules.opt.nvimtree
+Tree based file browser in sidebar, replaces netrw. Disable netrw once enabled.
+
+#### modules.opt.tokyonight
+Tokyonight colourscheme, storm option picked.
+
+#### modules.opt.ufo
+Lsp based code folding.
+
+#### modules.opt.vimtex
+LaTeX nvim utils.
