@@ -15,8 +15,8 @@ local function footer()
 end
 
 local function launch_dashboard()
-  local api = pcall(require, 'nvim-tree.api')
-  if api then
+  local ok, api = pcall(require, 'nvim-tree.api')
+  if ok then
     api.tree.close()
   end
   vim.cmd(":Dashboard")

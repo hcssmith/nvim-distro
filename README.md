@@ -28,7 +28,7 @@ return M
 ```
 If this is in base, add the module string to the list in
 lua/setup/init.lua:base_modules otherwise it will need to be 
-added into the list in init.lua to be passed to the setup function.
+added into the list in init.lua to be passed to the setup function
 
 ## setup
 The setup:init() function takes in a table of globaly availble modules and a list of optional modules to load, the module must be in the include path somewhere. As part of this function we set various settings, some of which are controlled by the globals defined in setup.vars and overwritten by the table passed to setup:init()
