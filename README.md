@@ -110,3 +110,20 @@ the keymaps being set in `modules.base.lsp`
 #### modules.base.lualine
 I have modified the default lualine confif to have the LSP breadcrumbs from
 lspsaga dsipalyed if an LSP is loaded else it displays the filename. 
+
+#### modules.base.Neorg
+This is the Notes plugin, unusually keybinds are done using the method included
+in the plugin rather than the keybind function it uses the inbuilt keybind
+module. prefixes the kybinds with the local leaders and only performs the binds
+in norg buffers.
+
+#### modules.base.telescope
+A fuzzy finder which can be easily integrated into other plugins, I have
+keybinds for files, buffers, git files, grep results and help. I have also
+overwitten the finf_files picker to cd into the directory that is picked.
+
+#### modules.base.treesitter
+This is the main module that provides syntax highliting via parsing the AST. I
+have disabled this for Makefiles as I dislike the syntax highlighting provided
+for this.
+
