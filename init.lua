@@ -1,11 +1,12 @@
 local base_dir = "~/.config/nvim"
 
-if not vim.tbl_contains(vim.opt.rtp:get(), base_dir) and Test==false then
+if not vim.tbl_contains(vim.opt.rtp:get(), base_dir) and Test~=true then
   vim.opt.rtp:prepend(base_dir)
 end
 
 local mtl = {
   'modules.opt.dracula',
+  'modules.opt.composer',
   'modules.opt.gitsigns',
   'modules.opt.gitworktree',
   'modules.opt.neogit',
