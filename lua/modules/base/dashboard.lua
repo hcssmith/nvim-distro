@@ -1,41 +1,21 @@
 M = {}
 
-local loader = require('modules.base.loader')
-
-local function footer()
-  local version = " " .. vim.version().major .. "." .. vim.version().minor .. "." .. vim.version().patch
-  local lazy_ok, lazy = pcall(require, "lazy")
-  if lazy_ok then
-    local total_plugins = lazy.stats().count .. " Plugins"
-    local startuptime = (math.floor(lazy.stats().startuptime * 100 + 0.5) / 100)
-    return version .. "   " .. total_plugins .. "  󰄉 " .. startuptime .. " ms"
-  else
-    return version
-  end
-end
-
-local function launch_dashboard()
-  local ok, api = pcall(require, 'nvim-tree.api')
-  if ok then
-    api.tree.close()
-  end
-  vim.cmd(":Dashboard")
-end
-
-M.keymap = {
-    normal = {
-      {'<leader>db', function () launch_dashboard() end}
-    }
-  }
-
-
 M.lazy = {
   'glepnir/dashboard-nvim',
   event = 'VimEnter',
-  config = function() require('dashboard').setup({
+  keys = {
+    {'<leader>db', function ()
+      local ok, api = pcall(require, 'nvim-tree.api')
+      if ok then
+        api.tree.close()
+      end
+      vim.cmd(":Dashboard")
+    end}
+  },
+  opts = {
     theme = "doom",
     config = {
-      header = loader.Opts.Title,
+      header = require('modules.base.loader').Opts.Title,
       center = {
         {
           icon = '󰈔 ',
@@ -128,16 +108,10 @@ M.lazy = {
           action = ':q'
         },
       },
-      footer = {
-        " ",
-        " ", -- top padding
-        footer()
-      }
+      footer = {}
     }
-    -- config
-  })
-end,
-dependencies = { {'nvim-tree/nvim-web-devicons'}}
-  }
+  },
+  dependencies = { {'nvim-tree/nvim-web-devicons'}}
+}
 
- return M
+return M
