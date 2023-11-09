@@ -20,7 +20,6 @@ M.keymap = {
       {"<C-Down>", "<C-W><C-j>"},
       {"<C-Up>", "<C-W><C-k>"},
       {"<C-Right>", "<C-W><C-l>"},
-      {"Q", "<nop>"}
     }
 }
 

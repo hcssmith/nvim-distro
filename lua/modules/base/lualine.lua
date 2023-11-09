@@ -11,7 +11,10 @@ M.lazy = {
         icons_enabled = true,
       },
       sections = {
-        lualine_a = {'mode'},
+        lualine_a = {
+          { require('NeoComposer.ui').status_recording },
+          'mode'
+          },
         lualine_b = {'branch', 'diff', 'diagnostics'},
         lualine_c = {
           {
@@ -22,11 +25,10 @@ M.lazy = {
             'require("lspsaga.symbol.winbar").get_bar()',
             cond = lsp.LspActive
           },
-
-          "require'lsp-status'.status()"},
-        }
+          "require'lsp-status'.status()",
+          },
       }
-      end,
+    } end,
     dependencies = {
       'nvim-lua/lsp-status.nvim'
     }
