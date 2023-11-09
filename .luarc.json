@@ -4,5 +4,6 @@
         "/usr/local/share/nvim/runtime/lua",
         "${3rd}/luv/library"
     ],
-    "workspace.checkThirdParty": false
+    "workspace.checkThirdParty": false,
+    "completion.autoRequire": false
 }
