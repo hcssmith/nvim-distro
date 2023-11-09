@@ -1,25 +1,11 @@
 M = {}
 
-
-M.keymap = {
-    normal = {
-      {'<leader>e', function ()
-	local api = require('nvim-tree.api')
-        api.tree.toggle()
-      end}
-    }
-}
-
-function M.settings()
-  vim.api.nvim_set_hl(0, 'NvimTreeNormal', {bg='none'})
-end
-
 M.lazy = {
     'nvim-tree/nvim-tree.lua',
     dependencies = {
       'nvim-tree/nvim-web-devicons'
     },
-    config = function() require("nvim-tree").setup({
+    opts = {
       view = {
         adaptive_size = true
       },
@@ -27,7 +13,18 @@ M.lazy = {
         enable = true,
         update_cwd = true,
       },
-    }) end
+    },
+    lazy = true,
+    keys = {
+      {'<leader>e', function ()
+        local api = require('nvim-tree.api')
+        api.tree.toggle()
+      end, desc = 'Toggle nvim-tree'}
+    },
+    config = function (_, opts)
+      require("nvim-tree").setup(opts)
+      vim.api.nvim_set_hl(0, 'NvimTreeNormal', {bg='none'})
+    end
   }
 
 return M
