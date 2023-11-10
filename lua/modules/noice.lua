@@ -1,6 +1,4 @@
-M = {}
-
-M.lazy = {
+return {
   "folke/noice.nvim",
   event = "VeryLazy",
   dependencies = {
@@ -30,4 +28,3 @@ M.lazy = {
     vim.notify = require('notify')
   end
 }
-return M

@@ -1,6 +1,4 @@
-M = {}
-
-M.lazy = {
+return {
     'nvim-telescope/telescope.nvim',
     dependencies = {
       'nvim-lua/plenary.nvim',
@@ -40,5 +38,3 @@ M.lazy = {
       require('telescope').setup({opts})
     end
   }
-
-return M

@@ -1,6 +1,4 @@
-M = {}
-
-M.lazy = {
+return {
   'nvim-lualine/lualine.nvim',
   event = { 'BufReadPre', 'BufNewFile' },
   opts  = {
@@ -31,5 +29,3 @@ M.lazy = {
     'nvim-lua/lsp-status.nvim',
   }
 }
-
-return M

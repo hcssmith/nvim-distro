@@ -1,8 +1,4 @@
-
-M = {}
-
-
-M.lazy = {
+return {
     'ThePrimeagen/git-worktree.nvim',
     keys = {
       {'<leader>gwc', function () require('telescope').extensions.git_worktree.create_git_worktree() end},
@@ -11,5 +7,3 @@ M.lazy = {
     lazy = true,
     config = true
   }
-
-return M

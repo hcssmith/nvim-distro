@@ -1,8 +1,4 @@
-
-M = {}
-
-
-M.lazy = {
+return {
   'ThePrimeagen/harpoon',
   dependencies = {
     "nvim-lua/plenary.nvim",         -- required
@@ -22,5 +18,3 @@ M.lazy = {
   },
   config = true,
 }
-
-return M

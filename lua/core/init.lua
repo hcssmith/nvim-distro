@@ -1,9 +1,5 @@
 M = {}
 
-local loader = require('modules.base.loader')
-
-local t_opts = {silent = true}
-
 M.keymap = {
     insert = {
       {"jk", "<Esc>"}

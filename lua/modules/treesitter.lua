@@ -1,7 +1,4 @@
-require('core.util.env')
-M = {}
-
-M.lazy = {
+return {
     'nvim-treesitter/nvim-treesitter',
     cond = HasCCompiler,
     build = ":TSUpdate",
@@ -64,5 +61,3 @@ M.lazy = {
       }
     }) end
   }
-
-return M

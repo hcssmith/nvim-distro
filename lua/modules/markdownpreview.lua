@@ -1,6 +1,4 @@
-M = {}
-
-M.lazy = {
+return {
     "iamcco/markdown-preview.nvim",
     build = function() vim.fn["mkdp#util#install"]() end,
     lazy = 'VeryLazy',
@@ -8,5 +6,3 @@ M.lazy = {
       {"<leader>pv", ":MarkdownPreviewToggle<CR>"}
     }
   }
-
-return M

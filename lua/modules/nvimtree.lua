@@ -1,6 +1,4 @@
-M = {}
-
-M.lazy = {
+return {
     'nvim-tree/nvim-tree.lua',
     dependencies = {
       'nvim-tree/nvim-web-devicons'
@@ -26,5 +24,3 @@ M.lazy = {
       vim.api.nvim_set_hl(0, 'NvimTreeNormal', {bg='none'})
     end
   }
-
-return M

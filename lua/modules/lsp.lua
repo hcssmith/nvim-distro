@@ -1,6 +1,4 @@
-M = {}
-
-M.lazy = {
+return {
     'VonHeikemen/lsp-zero.nvim',
     branch = 'v3.x',
     lazy = true,
@@ -76,6 +74,3 @@ M.lazy = {
       {'folke/neodev.nvim',opts = {}}
     }
   }
-
-
-return M

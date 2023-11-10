@@ -1,7 +1,4 @@
-M = {}
-
-
-M.lazy = {
+return {
   'kevinhwang91/nvim-ufo',
   --cond = NotWindows,
   dependencies = {
@@ -33,5 +30,3 @@ M.lazy = {
     require('ufo').setup(opts)
   end
 }
-
-return M

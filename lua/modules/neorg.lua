@@ -1,9 +1,4 @@
-require('core.util.env')
-
-
-M = {}
-
-M.lazy = {
+return {
   "nvim-neorg/neorg",
   build = ":Neorg sync-parsers",
   dependencies = { "nvim-lua/plenary.nvim" },
@@ -38,5 +33,3 @@ M.lazy = {
   },
 }
   }
-
-return M

@@ -22,13 +22,8 @@ function M:Init()
   vim.opt.rtp:prepend(lazypath)
 end
 
-function M:RegisterModule(module)
-  table.insert(self.Plugins, module)
-end
-
 function M:Run(opts)
-  opts = opts
-  require('lazy').setup(self.Plugins)
+  require('lazy').setup('modules', opts)
 end
 
 return M

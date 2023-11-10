@@ -1,7 +1,4 @@
-
-M = {}
-
-M.lazy = {
+return {
   "NeogitOrg/neogit",
   dependencies = {
     "nvim-lua/plenary.nvim",         -- required
@@ -19,4 +16,3 @@ M.lazy = {
     })
   end
 }
-return M

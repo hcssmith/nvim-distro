@@ -1,6 +1,4 @@
-M = {}
-
-M.lazy = {
+return {
   'glepnir/dashboard-nvim',
   event = 'VimEnter',
   keys = {
@@ -15,7 +13,7 @@ M.lazy = {
   opts = {
     theme = "doom",
     config = {
-      header = require('modules.base.loader').Opts.Title,
+      header = require('core').Opts.Title,
       center = {
         {
           icon = '󰈔 ',
@@ -123,5 +121,3 @@ M.lazy = {
   },
   dependencies = { {'nvim-tree/nvim-web-devicons'}}
 }
-
-return M
