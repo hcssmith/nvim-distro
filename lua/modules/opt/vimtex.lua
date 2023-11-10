@@ -1,5 +1,8 @@
 M = {}
 
-M.lazy = 'lervag/vimtex'
+M.lazy = {
+  'lervag/vimtex',
+  ft = 'tex'
+}
 
 return M

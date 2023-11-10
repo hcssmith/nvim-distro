@@ -1,12 +1,6 @@
 
 M = {}
 
-M.keymap = {
-  normal = {
-    {"<leader>ng", function () require('neogit').open() end}
-  }
-}
-
 M.lazy = {
   "NeogitOrg/neogit",
   dependencies = {
@@ -15,6 +9,10 @@ M.lazy = {
     "sindrets/diffview.nvim",        -- optional
     "ibhagwan/fzf-lua",              -- optional
   },
+  keys = {
+    {"<leader>ng", function () require('neogit').open() end}
+  },
+  lazy = true,
   config = function ()
     require("neogit").setup({
 
