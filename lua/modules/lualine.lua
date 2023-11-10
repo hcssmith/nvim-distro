@@ -3,7 +3,7 @@ return {
   event = { 'BufReadPre', 'BufNewFile' },
   opts  = {
     options = {
-      theme = require('modules.base.loader').Opts.Theme,
+      theme = require('core').Opts.Theme,
       icons_enabled = true,
     },
     sections = {
@@ -15,11 +15,11 @@ return {
       lualine_c = {
         {
           'filename',
-          cond = require('modules.base.lsp').LspInactive
+          cond = require('core.util.functions').LspInactive
         },
         {
           'require("lspsaga.symbol.winbar").get_bar()',
-          cond = require('modules.base.lsp').LspActive
+          cond = require('core.util.functions').LspActive
         },
         "require'lsp-status'.status()",
       },
