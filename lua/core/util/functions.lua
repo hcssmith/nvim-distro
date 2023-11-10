@@ -13,7 +13,7 @@ function LspInactive()
   return not LspActive()
 end
 
-function M:SetKeymaps(keymap_tbl, bufnr)
+function M.SetKeymaps(keymap_tbl, bufnr)
   local modes = {
     { "insert","i"},
     { "normal","n"},

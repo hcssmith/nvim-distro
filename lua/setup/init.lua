@@ -3,6 +3,7 @@ require('setup.vars')
 
 local lazy = require('core.lazy')
 local core = require('core')
+local fn = require('core.util.functions')
 
 local M = {}
 
@@ -64,6 +65,8 @@ function M:init(opts)
   lazy:Run(opts)
 
   general_settings(opts)
+
+  fn.SetKeymaps(core.keymap)
 
 
 end
