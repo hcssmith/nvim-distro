@@ -15,3 +15,14 @@ function HasCCompiler()
   return false
 end
 
+function NotesDir()
+  local loader = require('modules.base.loader')
+  local path = ""
+  if loader.Opts.OneDrive  == nil then
+    path = loader.Opts.Home .. loader.Opts.NotesDir
+  else
+    path = loader.Opts.OneDrive .. loader.Opts.NotesDir
+  end
+  return path
+end
+

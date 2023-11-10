@@ -5,6 +5,7 @@ M.lazy = {
     'nvim-treesitter/nvim-treesitter',
     cond = HasCCompiler,
     build = ":TSUpdate",
+    event = 'BufRead',
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects'
     },
