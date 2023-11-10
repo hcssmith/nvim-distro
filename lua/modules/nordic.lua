@@ -1,3 +1,4 @@
 return {
-  'AlexvZyl/nordic.nvim'
+  'AlexvZyl/nordic.nvim',
+  lazy=true,
 }
