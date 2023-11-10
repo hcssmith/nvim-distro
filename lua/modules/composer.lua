@@ -1,6 +1,4 @@
-M = {}
-
-M.lazy = {
+return  {
   "ecthelionvi/NeoComposer.nvim",
   dependencies = { "kkharji/sqlite.lua" },
   lazy = true,
@@ -9,5 +7,3 @@ M.lazy = {
   },
   config = true,
 }
-
-return M

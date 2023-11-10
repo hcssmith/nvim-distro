@@ -1,7 +1,6 @@
-M = {}
-
-M.lazy = {
+return {
   'sidebar-nvim/sidebar.nvim',
+  enabled = false,
   keys = {
     {'<leader>e', function ()
       local api = require('sidebar-nvim')
@@ -17,5 +16,3 @@ M.lazy = {
     },
   }
 }
-
-return M

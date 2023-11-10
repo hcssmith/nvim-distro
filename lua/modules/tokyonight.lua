@@ -1,10 +1,6 @@
-M = {}
-
-M.lazy = {
+return {
   'folke/tokyonight.nvim',
   opts = {
     style = 'storm'
   }
 }
-
-return M

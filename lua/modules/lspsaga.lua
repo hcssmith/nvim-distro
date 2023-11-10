@@ -1,6 +1,4 @@
-M = {}
-
-M.lazy = {
+return {
   'nvimdev/lspsaga.nvim',
   event = 'LspAttach',
   keys = {
@@ -15,5 +13,3 @@ M.lazy = {
     }
   }
 }
-
-return M

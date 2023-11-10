@@ -16,12 +16,12 @@ function HasCCompiler()
 end
 
 function NotesDir()
-  local loader = require('modules.base.loader')
+  local core = require('core')
   local path = ""
-  if loader.Opts.OneDrive  == nil then
-    path = loader.Opts.Home .. loader.Opts.NotesDir
+  if core.Opts.OneDrive  == nil then
+    path = core.Opts.Home .. core.Opts.NotesDir
   else
-    path = loader.Opts.OneDrive .. loader.Opts.NotesDir
+    path = core.Opts.OneDrive .. core.Opts.NotesDir
   end
   return path
 end
