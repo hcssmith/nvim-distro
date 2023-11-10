@@ -9,6 +9,16 @@ return {
       vim.g.lsp_zero_extend_lspconfig = 0
     end,
     --cond = NotWindows,
+    keys = {
+      {"gd", vim.lsp.buf.definition},
+      {"<leader>vws", vim.lsp.buf.workspace_symbol},
+      {"<leader>vd", vim.diagnostic.open_float},
+      {"[d", vim.diagnostic.goto_next},
+      {"]d", vim.diagnostic.goto_prev},
+      {"<leader>vca", vim.lsp.buf.code_action},
+      {"<leader>vrr", vim.lsp.buf.references},
+      {"<leader>vrn", vim.lsp.buf.rename},
+    },
     dependencies = {
       {
         'williamboman/mason.nvim',
@@ -33,6 +43,10 @@ return {
           cmp.setup({
             formatting = lsp_zero.cmp_format(),
             mapping = cmp.mapping.preset.insert({
+              ['<CR>'] = cmp.mapping.confirm({
+                select = true,
+                behavior = cmp.ConfirmBehavior.Replace
+              }),
               ['<C-Space>'] = cmp.mapping.complete(),
               ['<C-u>'] = cmp.mapping.scroll_docs(-4),
               ['<C-d>'] = cmp.mapping.scroll_docs(4),
@@ -64,7 +78,15 @@ return {
             handlers = {
               lsp_zero.default_setup,
               lua_ls = function()
-                local lua_opts = lsp_zero.nvim_lua_ls()
+                local lua_opts = lsp_zero.nvim_lua_ls({
+                  settings = {
+                    Lua = {
+                      workspace = {
+                        checkThirdParty = false,
+                      },
+                    },
+                  }
+                })
                 require('lspconfig').lua_ls.setup(lua_opts)
               end,
             }
