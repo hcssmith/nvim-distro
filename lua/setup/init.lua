@@ -66,9 +66,6 @@ function M:init(opts)
 
   general_settings(opts)
 
-  fn.SetKeymaps(core.keymap)
-
-
 end
 
 
