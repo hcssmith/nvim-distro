@@ -2,8 +2,7 @@ require('core.util.env')
 require('setup.vars')
 
 local lazy = require('core.lazy')
-local core = require('core')
-local fn = require('core.util.functions')
+local global = require('core.global')
 
 local M = {}
 
@@ -55,7 +54,7 @@ function M:init(opts)
 
   opts.OneDrive = os.getenv('OneDrive')
 
-  core.Opts = opts
+  global.Opts = opts
 
   -- Set mapleader before anything else (required for Lazy)
   vim.g.mapleader = opts.MapLeader
