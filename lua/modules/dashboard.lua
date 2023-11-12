@@ -13,7 +13,7 @@ return {
   opts = {
     theme = "doom",
     config = {
-      header = require('core').Opts.Title,
+      header = require('core.global').Opts.Title,
       center = {
         {
           icon = '󰈔 ',

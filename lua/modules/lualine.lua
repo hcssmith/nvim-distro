@@ -3,7 +3,7 @@ return {
   event = { 'BufReadPre', 'BufNewFile' },
   opts  = {
     options = {
-      theme = require('core').Opts.Theme,
+      theme = require('core.global').Opts.Theme,
       icons_enabled = true,
     },
     sections = {
