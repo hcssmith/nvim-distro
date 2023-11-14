@@ -62,7 +62,5 @@ Vars = {
   Title = titles.nvim,
   Theme = "dracula",
   NotesDir = "/notes/",
-  TabWidth = 2,
-  TextWidth = 80,
   MapLeader = " ",
 }
