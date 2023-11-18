@@ -9,9 +9,12 @@ return {
         local ls = require('luasnip')
         if ls.jumpable(1) then
           ls.jump(1)
+        else
+          local key = vim.api.nvim_replace_termcodes("<Tab>", true, false, true)
+          vim.api.nvim_feedkeys(key, 'n', false)
         end
       end,
-      mode = 'i'
+      mode = {'i', 's'}
     },
     {
       '<S-Tab>',
@@ -21,7 +24,7 @@ return {
           ls.jump(-1)
         end
       end,
-      mode = 'i'
+      mode = {'i', 's'}
     },
     {
       '<C-k>',
