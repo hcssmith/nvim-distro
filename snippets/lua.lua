@@ -10,7 +10,6 @@ local fmt = require("luasnip.extras.fmt").fmt
 local fmta = require("luasnip.extras.fmt").fmta
 local rep = require("luasnip.extras").rep
 
-
 return {
   s({
       trig = "lazy",
@@ -19,24 +18,40 @@ return {
     fmt([[
     return {{
       '{repo_name}',
-      opts = {opts_table}
+      {opts}
+      {config}
     }}
     ]], {
       repo_name = i(1, 'Plugin Repo'),
-      opts_table = c(2, {
-        t('{}'),
+      opts = c(2, {
+        t('opts = {},'),
         fmt([[
-          function ()
+          opts = function ()
             {define}
             return {{
               {body}
             }}
+          end,
+        ]],
+          {
+            define = i(1, '--Opts Defines'),
+            body = i(2, '--Opts Body')
+          }
+        ),
+        t('')
+      }),
+      config = c(3, {
+        t(''),
+        fmt([[
+          config = function(_, opts)
+            require('{req}').setup({{opts}})
+            {body}
           end
         ]],
-        {
-          define = i(1, 'Opts Defines'),
-          body = i(2, 'Opts Body')
-        }
+          {
+            req = i(1, 'main'),
+            body = i(2, '--body')
+          }
         )
       })
     }
