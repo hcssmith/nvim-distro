@@ -9,8 +9,8 @@ return
   },
   main = 'nvim-treesitter.configs',
   keys = {
-    {'<leader>ts', function () vim.treesitter.inspect_tree() end},
-    {'<leader>tq', function () vim.treesitter.query.edit() end}
+    {'<leader>ts',vim.treesitter.inspect_tree },
+    {'<leader>tq', vim.treesitter.query.edit }
   },
   opts = {
     ensure_installed = { "vimdoc", "javascript", "typescript", "c", "lua", "rust", "odin", "markdown", "markdown_inline", "query" },
@@ -23,24 +23,6 @@ return
       additional_vim_regex_highlighting = false,
       disable = {
         "make"
-      },
-    },
-    playground = {
-      enable = true,
-      disable = {},
-      updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
-      persist_queries = false, -- Whether the query persists across vim sessions
-      keybindings = {
-        toggle_query_editor = 'o',
-        toggle_hl_groups = 'i',
-        toggle_injected_languages = 't',
-        toggle_anonymous_nodes = 'a',
-        toggle_language_display = 'I',
-        focus_language = 'f',
-        unfocus_language = 'F',
-        update = 'R',
-        goto_node = '<cr>',
-        show_help = '?',
       },
     },
     textobjects = {
@@ -57,9 +39,15 @@ return
         enable = true,
         lookahead = true,
         keymaps = {
+          ["a="] = "@assignment.outer",
+          ["i="] = "@assignment.inner",
+          ["l="] = "@assignment.lhs",
+          ["r="] = "@assignment.rhs",
           ["af"] = "@function.outer",
           ["if"] = "@function.inner",
           ["ip"] = "@parameter.inner",
+          ["ab"] = "@block.outer",
+          ["ib"] = "@block.inner",
         },
         selection_modes = {
           ['@parameter.inner'] = 'v', -- charwise
