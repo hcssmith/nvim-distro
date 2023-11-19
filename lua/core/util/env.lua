@@ -26,3 +26,10 @@ function NotesDir()
   return path
 end
 
+function NotWindows()
+    if vim.loop.os_uname().sysname == "Windows_NT" then
+      return false
+    end
+    return true
+end
+
