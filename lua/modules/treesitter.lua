@@ -3,7 +3,7 @@ return
   'nvim-treesitter/nvim-treesitter',
   cond = HasCCompiler,
   build = ":TSUpdate",
-  event = 'BufRead',
+  event = {'BufRead','BufNew'},
   dependencies = {
     'nvim-treesitter/nvim-treesitter-textobjects',
   },
