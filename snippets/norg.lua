@@ -12,44 +12,81 @@ local rep = require("luasnip.extras").rep
 
 return {
   s({
-    trig = 'issue',
-    desc = 'Case Notes'
-  },
-  fmt([[
+      trig = 'issue',
+      desc = 'Case Notes'
+    },
+    fmt([[
   * {case_number}
     - {customer}
     - {desc}
     - ( ) {task}
   ]],
-  {
-    case_number = i(1, 'Case Number'),
-    customer = i(2, 'Customer Name'),
-    desc = i(3, 'Issue Description'),
-    task = i(4, 'First Task')
-  }
-  )),
+      {
+        case_number = i(1, 'Case Number'),
+        customer = i(2, 'Customer Name'),
+        desc = i(3, 'Issue Description'),
+        task = i(4, 'First Task')
+      }
+    )),
   s({
-    trig = 'devops',
-    desc = 'Dev Ops notes'
-  },
-  fmt([[
+      trig = 'devops',
+      desc = 'Dev Ops notes'
+    },
+    fmt([[
   * {ref}
     - {product}
     - {desc}
     - ( ) {task}
   ]],
-  {
-    ref = i(1, 'DevOps Reference'),
-    product = c(2, {
-      t('Access Recruit'),
-      t('Access TeamSeer'),
-      t('Access SafePay'),
-      t('Access Workspace'),
-      t('Access FinOps'),
-      t('Access Engage'),
-    }),
-    desc = i(3, 'Issue Description'),
-    task = i(4, 'First Task')
-  } -- TODO: Autogenerate devops link from ref & product
-  ))
+      {
+        ref = i(1, 'DevOps Reference'),
+        product = c(2, {
+          t('Access Recruit'),
+          t('Access TeamSeer'),
+          t('Access SafePay'),
+          t('Access Workspace'),
+          t('Access FinOps'),
+          t('Access Engage'),
+        }),
+        desc = i(3, 'Issue Description'),
+        task = i(4, 'First Task')
+      } -- TODO: Autogenerate devops link from ref & product
+    )),
+  s({
+      trig = 'sales_opp',
+      desc = 'Sales Opp Template',
+    },
+    fmt([[
+        Customer: {customer}
+      Case Number: {ref}
+      Problem: {subj}
+      Support Investigation Conclusions: {conclusion}
+      Impact: {impact}
+      Resolution Required By: {due}
+      Reason why Support are unable to continue the resolution of this case: {reason}
+      Recommended course of action required or help needed to progress: {actions}
+    ]],
+      {
+        customer = i(1, 'Customer Account Name'),
+        ref = i(2, 'Case Reference'),
+        subj = i(3, 'What is the problem'),
+        conclusion = i(4, 'What have we found'),
+        impact = c(5, {
+          fmt('High: {reason}', {reason = i(1, 'reason for impact')}),
+          fmt('Medium: {reason}', {reason = i(1, 'reason for impact')}),
+          fmt('Low: {reason}', {reason = i(1, 'reason for impact')}),
+        }),
+        due = i(6, 'When does this need to be done why'),
+        reason = c(7, {
+          fmt('{a}', {a = i(1, 'Why is this not for support')}),
+          t('Not for support to do.')
+        }),
+        actions = c(8, {
+          fmt('{a}', { a = i(1, 'What actions do PS need to take?')} ),
+          t('A quote to be provided to the customer')
+        })
+
+
+      }
+    ))
 }

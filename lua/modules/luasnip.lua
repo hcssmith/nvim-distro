@@ -52,6 +52,14 @@ return {
           passive = {
             virt_text = { { "", "@comment" } },
             hl_mode = "combine"
+          },
+          visited = {
+            virt_text = { { "", "@comment" } },
+            hl_mode = "combine"
+          },
+          unvisited = {
+            virt_text = { { "", "@comment" } },
+            hl_mode = "combine"
           }
         },
         [types.insertNode] = {
@@ -62,6 +70,14 @@ return {
           passive = {
             virt_text = { { "", "@comment" } },
             hl_mode = "combine"
+          },
+          visited = {
+            virt_text = { { "", "@comment" } },
+            hl_mode = "combine"
+          },
+          unvisited = {
+            virt_text = { { "", "@comment" } },
+            hl_mode = "combine"
           }
         },
         [types.functionNode] = {
@@ -70,6 +86,14 @@ return {
             hl_mode = "combine"
           },
           passive = {
+            virt_text = { { "", "@comment" } },
+            hl_mode = "combine"
+          },
+          visited = {
+            virt_text = { { "", "@comment" } },
+            hl_mode = "combine"
+          },
+          unvisited = {
             virt_text = { { "", "@comment" } },
             hl_mode = "combine"
           }
