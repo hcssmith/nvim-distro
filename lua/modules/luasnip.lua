@@ -14,7 +14,7 @@ return {
           vim.api.nvim_feedkeys(key, 'n', false)
         end
       end,
-      mode = {'i', 's'}
+      mode = { 'i', 's' }
     },
     {
       '<S-Tab>',
@@ -24,7 +24,7 @@ return {
           ls.jump(-1)
         end
       end,
-      mode = {'i', 's'}
+      mode = { 'i', 's' }
     },
     {
       '<C-k>',
@@ -34,21 +34,54 @@ return {
           ls.change_choice(1)
         end
       end,
-      mode = {'s', 'i'}
-    }
+      mode = { 's', 'i' }
+    },
   },
-  config = function(_, _)
+  opts = function()
+    local types = require("luasnip.util.types")
+    return {
+      history = true,
+      updateevents = 'TextChanged,TextChangedI',
+      enable_autosnippets = true,
+      ext_opts = {
+        [types.choiceNode] = {
+          active = {
+            virt_text = { { "", "@class" } },
+            hl_mode = "combine"
+          },
+          passive = {
+            virt_text = { { "", "@comment" } },
+            hl_mode = "combine"
+          }
+        },
+        [types.insertNode] = {
+          active = {
+            virt_text = { { "󰦨", "@class" } },
+            hl_mode = "combine"
+          },
+          passive = {
+            virt_text = { { "", "@comment" } },
+            hl_mode = "combine"
+          }
+        },
+        [types.functionNode] = {
+          active = {
+            virt_text = { { "󰊕", "@class" } },
+            hl_mode = "combine"
+          },
+          passive = {
+            virt_text = { { "", "@comment" } },
+            hl_mode = "combine"
+          }
+        },
+      },
+    }
+  end,
+  init = function()
     require("luasnip.loaders.from_vscode").lazy_load()
-    -- Ensure snippets load when in worktree TODO: find a better solution than
-    -- this
     if Test == true then
       require("luasnip.loaders.from_lua").load({ paths = CustomBaseDir .. '/snippets' })
     end
     require("luasnip.loaders.from_lua").load({ paths = vim.fn.stdpath('config') .. '/snippets' })
-    require('luasnip').config.set_config({
-      history = true,
-      updateevents = 'TextChanged,TextChangedI',
-      enable_autosnippets = true
-    })
-  end
+  end,
 }
