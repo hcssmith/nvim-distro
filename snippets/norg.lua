@@ -10,6 +10,11 @@ local fmt = require("luasnip.extras.fmt").fmt
 local fmta = require("luasnip.extras.fmt").fmta
 local rep = require("luasnip.extras").rep
 
+local function day_entry(_, _, _)
+  return os.date('%Y-%m-%d')
+end
+
+
 return {
   s({
       trig = 'issue',
@@ -28,6 +33,16 @@ return {
         task = i(4, 'First Task')
       }
     )),
+  s({
+      trig = 'day_entry',
+      desc = 'New day entry.',
+    },
+    fmt([[- {{:{day}:}}]],
+      {
+        day = f(day_entry)
+      }
+    )
+  ),
   s({
       trig = 'devops',
       desc = 'Dev Ops notes'
