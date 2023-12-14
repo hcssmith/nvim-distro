@@ -14,6 +14,18 @@ local function day_entry(_, _, _)
   return os.date('%Y-%m-%d')
 end
 
+local function generate_link(args, _, _)
+  local product = ({
+          ['Access Recruit'] = 'Access%20Recruit',
+          ['Access TeamSeer'] = 'Access%20TeamSeer',
+          ['Access SafePay'] = 'Access%20SafePay',
+          ['Access Workspace'] = 'Access%20Workspace',
+          ['Access FinOps'] = 'Access%20FinOps',
+          ['Access Engage'] = 'Access%20Engage',
+  })[args[2][1]] or ''
+  return '[' .. args[1][1] .. ']{https//dev.azure.com/access-devops/' .. product .. '/_workitems/edit/' .. args[1][1] .. '}'
+end
+
 
 return {
   s({
@@ -50,11 +62,13 @@ return {
     fmt([[
   * {ref}
     - {product}
+    - Link: {link}
     - {desc}
     - ( ) {task}
   ]],
       {
         ref = i(1, 'DevOps Reference'),
+        link = f(generate_link, {1, 2}),
         product = c(2, {
           t('Access Recruit'),
           t('Access TeamSeer'),
