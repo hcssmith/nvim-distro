@@ -16,14 +16,15 @@ end
 
 local function generate_link(args, _, _)
   local product = ({
-          ['Access Recruit'] = 'Access%20Recruit',
-          ['Access TeamSeer'] = 'Access%20TeamSeer',
-          ['Access SafePay'] = 'Access%20SafePay',
-          ['Access Workspace'] = 'Access%20Workspace',
-          ['Access FinOps'] = 'Access%20FinOps',
-          ['Access Engage'] = 'Access%20Engage',
+    ['Access Recruit'] = 'Access%20Recruit',
+    ['Access TeamSeer'] = 'Access%20TeamSeer',
+    ['Access SafePay'] = 'Access%20SafePay',
+    ['Access Workspace'] = 'Access%20Workspace',
+    ['Access FinOps'] = 'Access%20FinOps',
+    ['Access Engage'] = 'Access%20Engage',
   })[args[2][1]] or ''
-  return '[' .. args[1][1] .. ']{https//dev.azure.com/access-devops/' .. product .. '/_workitems/edit/' .. args[1][1] .. '}'
+  return '[' ..
+  args[1][1] .. ']{https//dev.azure.com/access-devops/' .. product .. '/_workitems/edit/' .. args[1][1] .. '}'
 end
 
 
@@ -68,7 +69,7 @@ return {
   ]],
       {
         ref = i(1, 'DevOps Reference'),
-        link = f(generate_link, {1, 2}),
+        link = f(generate_link, { 1, 2 }),
         product = c(2, {
           t('Access Recruit'),
           t('Access TeamSeer'),
@@ -79,7 +80,7 @@ return {
         }),
         desc = i(3, 'Issue Description'),
         task = i(4, 'First Task')
-      } -- TODO: Autogenerate devops link from ref & product
+      }
     )),
   s({
       trig = 'sales_opp',
@@ -101,21 +102,19 @@ return {
         subj = i(3, 'What is the problem'),
         conclusion = i(4, 'What have we found'),
         impact = c(5, {
-          fmt('High: {reason}', {reason = i(1, 'reason for impact')}),
-          fmt('Medium: {reason}', {reason = i(1, 'reason for impact')}),
-          fmt('Low: {reason}', {reason = i(1, 'reason for impact')}),
+          fmt('High: {reason}', { reason = i(1, 'reason for impact') }),
+          fmt('Medium: {reason}', { reason = i(1, 'reason for impact') }),
+          fmt('Low: {reason}', { reason = i(1, 'reason for impact') }),
         }),
         due = i(6, 'When does this need to be done why'),
         reason = c(7, {
-          fmt('{a}', {a = i(1, 'Why is this not for support')}),
+          fmt('{a}', { a = i(1, 'Why is this not for support') }),
           t('Not for support to do.')
         }),
         actions = c(8, {
-          fmt('{a}', { a = i(1, 'What actions do PS need to take?')} ),
+          fmt('{a}', { a = i(1, 'What actions do PS need to take?') }),
           t('A quote to be provided to the customer')
         })
-
-
       }
     ))
 }
