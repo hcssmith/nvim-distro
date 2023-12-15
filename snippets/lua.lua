@@ -16,6 +16,7 @@ return {
       desc = "Basic lazy plugin spec."
     },
     fmt([[
+    ---@type LazyPluginSpec
     return {{
       '{repo_name}',
       {opts}

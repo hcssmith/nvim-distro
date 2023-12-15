@@ -1,3 +1,4 @@
+---@type LazyPluginSpec
 return  {
   "ecthelionvi/NeoComposer.nvim",
   dependencies = { "kkharji/sqlite.lua" },

@@ -6,6 +6,7 @@ M.keymap = {
   }
 }
 
+-- Ensure lazy is installed to the latest stable release.
 function M:Init()
   local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
   if not vim.loop.fs_stat(lazypath) then
@@ -21,8 +22,10 @@ function M:Init()
   vim.opt.rtp:prepend(lazypath)
 end
 
+--- Run lazy with an optional opts table.
+---@param opts table
 function M:Run(opts)
-  require('lazy').setup('modules', opts)
+  require('lazy').setup('plugins', opts)
 end
 
 return M
