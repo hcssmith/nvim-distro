@@ -4,20 +4,17 @@ return {
   dependencies = { "rafamadriz/friendly-snippets" },
   keys = {
     {
-      '<Tab>',
+      '<C-j>',
       function()
         local ls = require('luasnip')
         if ls.jumpable(1) then
           ls.jump(1)
-        else
-          local key = vim.api.nvim_replace_termcodes("<Tab>", true, false, true)
-          vim.api.nvim_feedkeys(key, 'n', false)
         end
       end,
       mode = { 'i', 's' }
     },
     {
-      '<S-Tab>',
+      '<C-k>',
       function()
         local ls = require('luasnip')
         if ls.jumpable(-1) then
@@ -27,7 +24,7 @@ return {
       mode = { 'i', 's' }
     },
     {
-      '<C-k>',
+      '<C-n>',
       function()
         local ls = require('luasnip')
         if ls.choice_active() then
@@ -105,7 +102,8 @@ return {
     require("luasnip.loaders.from_vscode").lazy_load()
     if Test == true then
       require("luasnip.loaders.from_lua").load({ paths = CustomBaseDir .. '/snippets' })
+    else
+      require("luasnip.loaders.from_lua").load({ paths = vim.fn.stdpath('config') .. '/snippets' })
     end
-    require("luasnip.loaders.from_lua").load({ paths = vim.fn.stdpath('config') .. '/snippets' })
   end,
 }
