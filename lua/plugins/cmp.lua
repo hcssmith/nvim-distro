@@ -125,7 +125,7 @@ return {
           keyword_length = 5,
         },
         { name = 'luasnip' },
-        { 
+        {
           name = 'treesitter',
           keyword_length = 5
         }
