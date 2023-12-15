@@ -100,3 +100,11 @@
 ---@field import string spec module to import
 ---@field enabled? boolean|(fun():boolean)
 ---@field cond? boolean|(fun():boolean)
+      
+---@class AutoCmdEvent 
+---@field buf number
+---@field event string
+---@field file string
+---@field group number
+---@field id number
+---@field match string
