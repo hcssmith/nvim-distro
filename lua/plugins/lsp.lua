@@ -1,8 +1,9 @@
+---@type LazyPluginSpec
 return {
   'VonHeikemen/lsp-zero.nvim',
   branch = 'v3.x',
   lazy = true,
-  config = false,
+  config = nil,
   keys = {
     { "gd",          vim.lsp.buf.definition },
     { "<leader>vws", vim.lsp.buf.workspace_symbol },

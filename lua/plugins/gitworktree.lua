@@ -1,3 +1,4 @@
+---@type LazyPluginSpec
 return {
     'ThePrimeagen/git-worktree.nvim',
     keys = {

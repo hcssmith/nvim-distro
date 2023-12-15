@@ -6,6 +6,8 @@ local global = require('core.global')
 
 local M = {}
 
+---initialise the environment, and setup all plugins.
+---@param opts table?
 function M:init(opts)
   if opts == nil then opts = {} end
 
