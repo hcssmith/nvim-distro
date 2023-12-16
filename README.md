@@ -26,3 +26,40 @@ extracted the `LazyPluginSpec` type from `lazy.nvim` to enable the lsp to
 autosuggest the entries in a plugin specification.
 
 ## plugins
+An explaination of each of the plugins that are installed, along with any
+options that are specified.
+
+### cmp
+In `cmp.lua` we define a local function `set_hl()` which is used to style the
+cmp completion menu. Primarily this allows for the lefthand block that indicates
+the completion type.
+
+CMP is laxy loaded on the `InserEnter` event. It depends on various completion
+sources listed below as well as `lspkind` and `nvim-autopairs` lsp kind is used
+for the icons in the completion menu, nvim-autopairs is used to automatically
+insert a `()` at the end of a method / function completion, this is enbled in
+the `config` function. In the config function we also run the `set_hl`
+function and pass the opts table to `cmp.setup()` manually.
+
+In `opts` we ensure the snippet provider is set to be `luasnip`. We enable some
+basic mappings `C-b` / `C-f`: scroll documentation. `CR` to accept the
+completion only when something is explicitly selected and `C-Space` to launch
+the completion window if not currently triggered. We also style the menu by
+removing any border removing all padding and setting the offset to be -3 this
+should put the menu bellow the words being typed properly lined up. We also set
+a couple of highlights to render the menu to be transparent.
+
+We also configure the layout of the individual entries. We set it to be kind /
+abbr / menu. kind we get from `lspkind`, menu we define a label for each CMP
+source. abbr is provided by the CMP source.
+
+#### sources
+- `nvim_lsp` Get from an active LSP client, ignore any snippet types, as we get
+   these from luasnip.
+- `path` complete form paths on the system.
+- `buffer` any words in the buffer, trigger on words longer than 5 letters.
+- `luasnip` snippet provider
+- `treesitter` completion based on treesitter parsing. useful for strings.
+
+### 
+
