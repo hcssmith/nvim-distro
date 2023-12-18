@@ -101,3 +101,69 @@ outline & hover from this. I have disabled the symbol in winbar function as
 well.
 
 ### lualine
+This replaces the statusline, The theme is taken from globals, to ensure that
+lualine & everything else matches. Icons are also enabled. The neocomposer
+status is displayed alongside the mode. Next we have the branch / diff and
+diagnostics list. After that we display the filename or the WinBar from LspSaga.
+Then the LSP status. The reset of the lualine is the default config (encoding /
+OS / filetype / location)
+
+### luasnip
+This is the snippet engine configured with CMP. I have setup `C-j/k` to move
+through the insert points in the snippet, and `C-n` to cycle through the options
+in a choice node. I have setup, via ext_ops, an indication as to what nodes
+there are and what the types of said nodes are. Snippets are loaded from the
+`filetype.lua` in `$CONFIG/snippets` loaded in the init section of the plugin
+alongside the entries from FriendlySnippets.
+
+### markdownpreview
+A lazy loaded markdown previewer, loads on `<space>pv` key press.
+
+### mason-lspconfig
+Specific configurations for lsp servers. I have setup inlay hints in here,
+though it only seems to wokr half of the time, I will need to do some further
+investigation into the causes of this.
+
+### mason
+Lsp & treesitter installer.
+
+### neodev
+Poper LSP integration of the nvim api.
+
+### neogit
+Manage git from within nvim.
+
+### neorg
+Notes taking plugin, several keybinds are done in this to make handling task
+items a bit easier. Also the core notes directory is defined from globals. 
+
+### noice
+Fancier UI in neovim. Some compatibilty options are set within here. Bottom
+search / floating cms, message split are enabled whilst inc_rename &
+lsp_doc_border are diabled. We also override the deault notifier with
+`nvim-notify`
+
+### nordic
+Nordic UI theme.
+
+### nvimsidebar
+Disabled 
+
+### nvim-tree
+Tree based filebrowser in the sidebar, toggle with `<space>e`.
+
+### setup
+Core configuration options set through a plugin.
+
+### telescope
+
+### tokyonight
+
+### treesitter
+
+### ufo
+
+### vimtex
+
+
+
