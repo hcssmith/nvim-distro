@@ -61,5 +61,43 @@ source. abbr is provided by the CMP source.
 - `luasnip` snippet provider
 - `treesitter` completion based on treesitter parsing. useful for strings.
 
-### 
+### composer
+This is used to complement the macro functionalities within neovim. Providing
+some additional utilites (notifications / register views). We use layy to bind
+`<space>m` to the macros menu.
 
+### dashboard
+This is a pretty menu that is dispalyed when starting vim. It has shortcuts to
+the notes dir, config, find files, new file, lazy update and quit.
+
+### dracula
+The dracula nvim theme, with the itallic comments options set to true.
+
+### gitsigns
+Display any changes to a file as tracked by git.
+
+### gitworktree
+Makes using wokrtrees easier.
+
+### harpoon
+Easily switch between a set of files, `<space>h(n)` for files `<space>hm` to
+mark a file and `<space>hl` to list marked files.
+
+### keybind
+A custom plugin that contains my base keybinds (`jk`, Control movement etc. )
+Will be expanded to allow custom keybinds in opts eventually.
+
+### lsp
+Lsp currently uses lsp-zero. I have setup an auto command to run 
+`vim.lsp.buf.format()` whenever a client is attached which has the ability to
+format a page. We also bind a few keys such as `gd`: Goto Definition.
+
+### lspconfig
+Is configured to load on Lsp Stat / Info and Install.
+
+### lspsaga
+A fancier UI for some LSP actions, I have chosed to use definition, codeaction,
+outline & hover from this. I have disabled the symbol in winbar function as
+well.
+
+### lualine
