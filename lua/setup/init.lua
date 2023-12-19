@@ -28,7 +28,7 @@ function M:init(opts)
 
   lazy:Init()
 
-  lazy:Run(opts)
+  lazy:Run(nil)
 
 end
 

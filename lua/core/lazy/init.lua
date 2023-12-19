@@ -1,11 +1,5 @@
 local M = {}
 
-M.keymap = {
-  normal = {
-    {"<leader>lu",function() require('lazy').update() end}
-  }
-}
-
 -- Ensure lazy is installed to the latest stable release.
 function M:Init()
   local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -23,7 +17,7 @@ function M:Init()
 end
 
 --- Run lazy with an optional opts table.
----@param opts table
+---@param opts table?
 function M:Run(opts)
   require('lazy').setup('plugins', opts)
 end

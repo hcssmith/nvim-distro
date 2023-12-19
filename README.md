@@ -1,163 +1,176 @@
 # Nvim-Distro
 
 ## Intro
-Designed to be a modular neovim configuration, each plugin is defined in
-it's own file with a plugin table, a keymap table and a config function.
+First we set the base_dir to be the config location, in case for some reason the
+config needs to be installed elsewhere. To use in conjunction with another nvim
+setup. We append this to the RTP and run the `init` function from the `setup`
+module.
 
-This allows for all parts of a plugin to be in the same area and esaily enabled
-as a job lot
+## Setup
+In setup we store some global variables and the init function. In the init
+function we merge the opts from the function and the standard variable set. We
+also set the `Home` and `OneDrive` paths. We then pass the resultant settings
+table into the global module to make it available to any plugins. We also set
+the `leader` key to space here. Next we run the `lazy.nvim` initialisation, then
+pass in the plugin directory.
 
-## Adding a module
-In either opt or base add a neww file in the following format
-```lua
-M = {}
+## lazy
+In the `init` function we check to see if lazy is installed, if it is not we
+clone the latest stable branch of the `lazy.nvim` repo and make sure to add the
+resultant path into `rtp`.
 
-M.keymap = {
-    normal = {
-    { 'keys', function() --[[Actions]] end }
-}
+Next we have the `Run` function which you pass a string to in this case `plugins` 
+this will load all plugins in the `lua/plugins` folder. Use the `lazy`lua 
+snippet to create a return value on a file in the correct format. I have
+extracted the `LazyPluginSpec` type from `lazy.nvim` to enable the lsp to
+autosuggest the entries in a plugin specification.
 
-function M.settings()
-    --general config
-end
+## plugins
+An explaination of each of the plugins that are installed, along with any
+options that are specified.
 
-M.lazy = {
-    --Lazy definition
-}
-return M
-```
-If this is in base, add the module string to the list in
-lua/setup/init.lua:base_modules otherwise it will need to be 
-added into the list in init.lua to be passed to the setup function
+### cmp
+In `cmp.lua` we define a local function `set_hl()` which is used to style the
+cmp completion menu. Primarily this allows for the lefthand block that indicates
+the completion type.
 
-## setup
-The setup:init() function takes in a table of globaly availble modules and a list of optional modules to load, the module must be in the include path somewhere. As part of this function we set various settings, some of which are controlled by the globals defined in setup.vars and overwritten by the table passed to setup:init()
+CMP is laxy loaded on the `InserEnter` event. It depends on various completion
+sources listed below as well as `lspkind` and `nvim-autopairs` lsp kind is used
+for the icons in the completion menu, nvim-autopairs is used to automatically
+insert a `()` at the end of a method / function completion, this is enbled in
+the `config` function. In the config function we also run the `set_hl`
+function and pass the opts table to `cmp.setup()` manually.
 
-### Steps in order
-1. merge Global Vars & opts
-2. Set opts.Home
-3. Set opts.OneDrive path
-4. pass all opts to loader for global access
-5. set mapleader (required for lazy)
-6. Initialise lazy (download & install if missing)
-7. Load all base modules into module collection
-8. load all optional modules into module collection
-9. Install all modules
-10. Apply all module settings (M.settings())
-11. Apply general settings
+In `opts` we ensure the snippet provider is set to be `luasnip`. We enable some
+basic mappings `C-b` / `C-f`: scroll documentation. `CR` to accept the
+completion only when something is explicitly selected and `C-Space` to launch
+the completion window if not currently triggered. We also style the menu by
+removing any border removing all padding and setting the offset to be -3 this
+should put the menu bellow the words being typed properly lined up. We also set
+a couple of highlights to render the menu to be transparent.
 
-## Modules
-Description of all modules in the config
+We also configure the layout of the individual entries. We set it to be kind /
+abbr / menu. kind we get from `lspkind`, menu we define a label for each CMP
+source. abbr is provided by the CMP source.
 
-### Base Modules
+#### sources
+- `nvim_lsp` Get from an active LSP client, ignore any snippet types, as we get
+   these from luasnip.
+- `path` complete form paths on the system.
+- `buffer` any words in the buffer, trigger on words longer than 5 letters.
+- `luasnip` snippet provider
+- `treesitter` completion based on treesitter parsing. useful for strings.
 
-#### modules.lazy
-This module loads the lazy.nvim plugin manager (M:Init()) this adds in the lazy
-installation path, checks if lazy is installed there and if it is not, it calls
-git in order to install lazy.nvim to the lazy installation path.
+### composer
+This is used to complement the macro functionalities within neovim. Providing
+some additional utilites (notifications / register views). We use layy to bind
+`<space>m` to the macros menu.
 
-We also have two helper functions to register a module into the plugin list
-(M:RegisterModule(module)) and to then run lazyvim against the plugin list;
-(M:Run(opts))
+### dashboard
+This is a pretty menu that is dispalyed when starting vim. It has shortcuts to
+the notes dir, config, find files, new file, lazy update and quit.
 
-#### modules.base
-This module contains the basic keymaps such as `jk` for escape and `C-Left /
-Right` for movement. 
+### dracula
+The dracula nvim theme, with the itallic comments options set to true.
 
-#### modules.base.dashboard
-This loads the dashboard plugin, which is the landing page for `nvim` with no
-file / path specified, I have keybinds on here to update plugins search config
-files, search notes files, and open the Neorg notes. Menu entries are definied
-in the lazy plugin specification. I have found that the menu action functions
-are best setup in the lazy definition rather than as separate functions due to
-issues with scope. I may be able to work arround this with proper requires, but
-I have not yet tried this.
+### gitsigns
+Display any changes to a file as tracked by git.
 
-#### modules.base.loader
-This is the core module that loads other modules, and applies keymaps and
-settings. There are 3 functions in this module to be aware of, `Load`,
-`SetKeymap` and `ApplySettings`
+### gitworktree
+Makes using wokrtrees easier.
 
-##### Load
-Pass this function the path of a module, it will check if any keymaps are
-definined, if they are it adds them to a table, likewise for settings and the
-lazy plugin definition.
+### harpoon
+Easily switch between a set of files, `<space>h(n)` for files `<space>hm` to
+mark a file and `<space>hl` to list marked files.
 
-##### SetKeymap
-`SetKeymap` runs through all fields in the table searching based on a defined
-set of modes, any new modes required can be added in the modes table (longname,
-keycode). Also passed to this function is an optional bufnr to apply keymaps to
-secific buffers only.
+### keybind
+A custom plugin that contains my base keybinds (`jk`, Control movement etc. )
+Will be expanded to allow custom keybinds in opts eventually.
 
-##### ApplySettings
-This runs all module settings functions and then applys any keymaps definied in
-the module.
+### lsp
+Lsp currently uses lsp-zero. I have setup an auto command to run 
+`vim.lsp.buf.format()` whenever a client is attached which has the ability to
+format a page. We also bind a few keys such as `gd`: Goto Definition.
 
-#### modules.base.lsp
-This sets up the LSP environment, and the various required plugins. Aside from
-the standard lazy / keymaps & settings we also define two functions to check if
-a buffer has a LSP client running `LspActive` & `LspInactive`. There is nothing
-special in the lazy definition, just the recommneded parts from the Lsp-Zero
-plugin. In settings we configure keymaps on a buffer basis, only applying once
-the LSP is started, there is also some configuraiton done to install Lsp clients
-and completion key bindings
+### lspconfig
+Is configured to load on Lsp Stat / Info and Install.
 
-#### modules.base.lspsaga
-This provides several useful features to compliment the usage of LSP, I have
-used the breadcrumbs in the satus bar as well as Hover & show definition with
-the keymaps being set in `modules.base.lsp`
+### lspsaga
+A fancier UI for some LSP actions, I have chosed to use definition, codeaction,
+outline & hover from this. I have disabled the symbol in winbar function as
+well.
 
-#### modules.base.lualine
-I have modified the default lualine confif to have the LSP breadcrumbs from
-lspsaga dsipalyed if an LSP is loaded else it displays the filename. 
+### lualine
+This replaces the statusline, The theme is taken from globals, to ensure that
+lualine & everything else matches. Icons are also enabled. The neocomposer
+status is displayed alongside the mode. Next we have the branch / diff and
+diagnostics list. After that we display the filename or the WinBar from LspSaga.
+Then the LSP status. The reset of the lualine is the default config (encoding /
+OS / filetype / location)
 
-#### modules.base.Neorg
-This is the Notes plugin, unusually keybinds are done using the method included
-in the plugin rather than the keybind function it uses the inbuilt keybind
-module. prefixes the kybinds with the local leaders and only performs the binds
-in norg buffers.
+### luasnip
+This is the snippet engine configured with CMP. I have setup `C-j/k` to move
+through the insert points in the snippet, and `C-n` to cycle through the options
+in a choice node. I have setup, via ext_ops, an indication as to what nodes
+there are and what the types of said nodes are. Snippets are loaded from the
+`filetype.lua` in `$CONFIG/snippets` loaded in the init section of the plugin
+alongside the entries from FriendlySnippets.
 
-#### modules.base.telescope
-A fuzzy finder which can be easily integrated into other plugins, I have
-keybinds for files, buffers, git files, grep results and help. I have also
-overwitten the finf_files picker to cd into the directory that is picked.
+### markdownpreview
+A lazy loaded markdown previewer, loads on `<space>pv` key press.
 
-#### modules.base.treesitter
-This is the main module that provides syntax highliting via parsing the AST. I
-have disabled this for Makefiles as I dislike the syntax highlighting provided
-for this.
+### mason-lspconfig
+Specific configurations for lsp servers. I have setup inlay hints in here,
+though it only seems to wokr half of the time, I will need to do some further
+investigation into the causes of this.
 
-#### modules.opt.dracula
-Dracula colour scheme, itallic comments set to true.
+### mason
+Lsp & treesitter installer.
 
-#### modules.opt.gitsigns
-Git changes in the gutter, no other changes.
+### neodev
+Poper LSP integration of the nvim api.
 
-#### modules.opt.gitworktree
-For managing worktree based workflows, a couple of keybinds and some hooks to
-indicate what was done in a message.
+### neogit
+Manage git from within nvim.
 
-#### modules.opt.markdownpreview
-Preview markdown in a webbrowser. Keybind to launch.
+### neorg
+Notes taking plugin, several keybinds are done in this to make handling task
+items a bit easier. Also the core notes directory is defined from globals. 
 
-#### modules.opt.noice
-Fancy UI for neovim, notifications in popups, command line in popupi window, no
-command line at the bottom.
+### noice
+Fancier UI in neovim. Some compatibilty options are set within here. Bottom
+search / floating cms, message split are enabled whilst inc_rename &
+lsp_doc_border are diabled. We also override the deault notifier with
+`nvim-notify`
 
-#### modules.opt.nordic
-Nordic colourscheme
+### nordic
+Nordic UI theme.
 
-#### modules.opt.nvimsidebar
-Neovim sidebar with the following modules, git, files, todos, buffers.
+### nvimsidebar
+Disabled 
 
-#### modules.opt.nvimtree
-Tree based file browser in sidebar, replaces netrw. Disable netrw once enabled.
+### nvim-tree
+Tree based filebrowser in the sidebar, toggle with `<space>e`.
 
-#### modules.opt.tokyonight
-Tokyonight colourscheme, storm option picked.
+### setup
+Core configuration options set through a plugin.
 
-#### modules.opt.ufo
+### telescope
+A fuzzy finder used in multiple plugins, I have bound `<space>ff` to find files,
+`<space>fb` to find buffers, `<space>gf` to git files and `<space>ps` to grep.
+
+### tokyonight
+Tokyonight theme.
+
+### treesitter
+context aware syntax highlighting. Enabled when going into a buffer. Also
+enabled is textobjects to enable treesitter aware motions. 
+
+### ufo
 Lsp based code folding.
 
-#### modules.opt.vimtex
-LaTeX nvim utils.
+### vimtex
+Latex help.
+
+
+
