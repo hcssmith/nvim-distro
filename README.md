@@ -156,14 +156,21 @@ Tree based filebrowser in the sidebar, toggle with `<space>e`.
 Core configuration options set through a plugin.
 
 ### telescope
+A fuzzy finder used in multiple plugins, I have bound `<space>ff` to find files,
+`<space>fb` to find buffers, `<space>gf` to git files and `<space>ps` to grep.
 
 ### tokyonight
+Tokyonight theme.
 
 ### treesitter
+context aware syntax highlighting. Enabled when going into a buffer. Also
+enabled is textobjects to enable treesitter aware motions. 
 
 ### ufo
+Lsp based code folding.
 
 ### vimtex
+Latex help.
 
 
 
