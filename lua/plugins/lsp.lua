@@ -15,8 +15,12 @@ return {
         })
         for _, client in pairs(clients) do
           if client.attached_buffers[ev.buf] == true and client.server_capabilities.documentFormattingProvider then
+            local view = vim.fn.winsaveview()
             vim.lsp.buf.format()
             vim.diagnostic.enable(ev.buf)
+            ---Issue with multiple functions same name, problem with LSP?
+            ---@diagnostic disable-next-line param-type-mismatch
+            vim.fn.winrestview(view)
             return
           end
         end
