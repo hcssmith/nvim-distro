@@ -24,7 +24,7 @@ local function generate_link(args, _, _)
     ['Access Engage'] = 'Access%20Engage',
   })[args[2][1]] or ''
   return '[' ..
-  args[1][1] .. ']{https//dev.azure.com/access-devops/' .. product .. '/_workitems/edit/' .. args[1][1] .. '}'
+      args[1][1] .. ']{https//dev.azure.com/access-devops/' .. product .. '/_workitems/edit/' .. args[1][1] .. '}'
 end
 
 
