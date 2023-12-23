@@ -9,6 +9,7 @@ return {
   end,
   config = function(_, _)
     local lsp_group = vim.api.nvim_create_augroup('LspUserAutoCmd', {})
+    local lsp_ns = vim.api.nvim_create_namespace('LspUserHighlights')
 
     vim.api.nvim_create_autocmd('BufWritePre', {
       desc = 'Auto run lsp format on save if a lsp client with the correct capabilitiy is connected',
@@ -41,6 +42,7 @@ return {
         })
         for _, client in pairs(clients) do
           if client.attached_buffers[ev.buf] == true and client.server_capabilities.inlayHintProvider then
+            vim.api.nvim_set_hl(lsp_ns, 'LspInlayHint', { fg = '#ffffff' })
             vim.lsp.inlay_hint.enable(ev.buf, true)
           end
         end
