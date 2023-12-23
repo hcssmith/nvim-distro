@@ -5,6 +5,7 @@ return {
   lazy = true,
   config = function(_, _)
     local lsp_group = vim.api.nvim_create_augroup('LspUserAutoCmd', {})
+
     vim.api.nvim_create_autocmd('BufWritePre', {
       desc = 'Auto run lsp format on save if a lsp client with the correct capabilitiy is connected',
       group = lsp_group,
@@ -21,10 +22,36 @@ return {
             ---Issue with multiple functions same name, problem with LSP?
             ---@diagnostic disable-next-line param-type-mismatch
             vim.fn.winrestview(view)
-            return
           end
         end
       end
+    })
+
+    vim.api.nvim_create_autocmd("InsertEnter", {
+      desc = 'Enable Inlay hints if a LSP with the capability is attached.',
+      group = lsp_group,
+      ---@param ev AutoCmdEvent
+      callback = function(ev)
+        local clients = vim.lsp.get_clients({
+          bufnr = ev.buf
+        })
+        for _, client in pairs(clients) do
+          if client.attached_buffers[ev.buf] == true and client.server_capabilities.inlayHintProvider then
+            vim.lsp.inlay_hint.enable(ev.buf, true)
+          end
+        end
+      end,
+    })
+
+    vim.api.nvim_create_autocmd("InsertLeave", {
+      desc = 'Disable inlay hints if enabled once leaving insert mode.',
+      group = lsp_group,
+      ---@param ev AutoCmdEvent
+      callback = function(ev)
+        if vim.lsp.inlay_hint.is_enabled(ev.buf) then
+          vim.lsp.inlay_hint.enable(ev.buf, false)
+        end
+      end,
     })
   end,
   keys = {
