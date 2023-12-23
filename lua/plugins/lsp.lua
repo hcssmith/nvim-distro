@@ -3,6 +3,10 @@ return {
   'VonHeikemen/lsp-zero.nvim',
   branch = 'v3.x',
   lazy = true,
+  init = function(_)
+    local ns = vim.api.nvim_create_namespace('LspUserHighlights')
+    vim.api.nvim_set_hl(ns, 'LspInlayHint', { fg = '#ffffff' })
+  end,
   config = function(_, _)
     local lsp_group = vim.api.nvim_create_augroup('LspUserAutoCmd', {})
 
