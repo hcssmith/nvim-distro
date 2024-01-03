@@ -90,7 +90,7 @@ Will be expanded to allow custom keybinds in opts eventually.
 ### lsp
 Lsp currently uses lsp-zero. I have setup an auto command to run 
 `vim.lsp.buf.format()` whenever a client is attached which has the ability to
-format a page. We also bind a few keys such as `gd`: Goto Definition.
+format a page. 
 
 ### lspconfig
 Is configured to load on Lsp Stat / Info and Install.
