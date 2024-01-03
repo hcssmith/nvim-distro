@@ -4,14 +4,14 @@ return
   'nvim-treesitter/nvim-treesitter',
   cond = HasCCompiler,
   build = ":TSUpdate",
-  event = {'BufRead','BufNew'},
+  event = { 'BufRead', 'BufNew' },
   dependencies = {
     'nvim-treesitter/nvim-treesitter-textobjects',
   },
   main = 'nvim-treesitter.configs',
   keys = {
-    {'<leader>ts',vim.treesitter.inspect_tree },
-    {'<leader>tq', vim.treesitter.query.edit }
+    { '<leader>ts', vim.treesitter.inspect_tree },
+    { '<leader>tq', vim.treesitter.query.edit }
   },
   opts = {
     ensure_installed = { "vimdoc", "javascript", "typescript", "c", "lua", "rust", "odin", "markdown", "markdown_inline", "query" },
@@ -52,8 +52,8 @@ return
         },
         selection_modes = {
           ['@parameter.inner'] = 'v', -- charwise
-          ['@function.outer'] = 'V', -- linewise
-          ['@function.inner'] = 'V', -- linewise
+          ['@function.outer'] = 'V',  -- linewise
+          ['@function.inner'] = 'V',  -- linewise
         },
         include_surrounding_whitespace = true,
       },

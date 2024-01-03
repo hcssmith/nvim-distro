@@ -58,7 +58,6 @@ return {
     })
   end,
   keys = {
-    { "gd",          vim.lsp.buf.definition },
     { "<leader>vws", vim.lsp.buf.workspace_symbol },
     { "<leader>vd",  vim.diagnostic.open_float },
     { "[d",          vim.diagnostic.goto_next },
