@@ -82,15 +82,21 @@ return {
     },
   },
   opts = function(_, _)
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    capabilities.textDocument.foldingRange = {
+      dynamicRegistration = false,
+      lineFoldingOnly = true
+    }
     return {
       handlers = {
         function(server_name)
-          print('Configuring ' .. server_name)
-          require('lspconfig')[server_name].setup({})
+          require('lspconfig')[server_name].setup({
+            capabilities = capabilities
+          })
         end,
         lua_ls = function(server_name)
-          print('Configuring ' .. server_name)
           require('lspconfig').lua_ls.setup({
+            capabilities = capabilities,
             settings = {
               Lua = {
                 hint = {
@@ -109,7 +115,7 @@ return {
       }
     }
   end,
-  config = function(self, opts)
+  config = function(_, opts)
     require('mason').setup({})
     require('mason-lspconfig').setup(opts)
   end
