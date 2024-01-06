@@ -3,7 +3,7 @@ return {
   'neovim/nvim-lspconfig',
   cmd = { 'LspInfo', 'LspInstall', 'LspStart' },
   event = { 'BufReadPre', 'BufNewFile' },
-  init = function(self)
+  init = function()
     local lsp_group = vim.api.nvim_create_augroup('LspUserAutoCmd', {})
     local lsp_inlay_hint_ns = vim.api.nvim_create_namespace('vim_lsp_inlayhint')
 
@@ -106,6 +106,9 @@ return {
                   paramType = true,
                   semicolon = 'All',
                   setType = true,
+                },
+                completion = {
+                  callSnippet = "Replace"
                 }
               }
             }
@@ -117,6 +120,7 @@ return {
   end,
   config = function(_, opts)
     require('mason').setup({})
+    require("neodev").setup({})
     require('mason-lspconfig').setup(opts)
   end
 }

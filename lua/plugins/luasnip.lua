@@ -1,13 +1,14 @@
 ---@type LazyPluginSpec
 return {
   "L3MON4D3/LuaSnip",
-  --version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
   build = 'make install_jsregexp',
+  event = { 'BufReadPre', 'BufNewFile' },
   dependencies = { "rafamadriz/friendly-snippets" },
   keys = {
     {
       '<C-j>',
       function()
+        print('Next Item')
         local ls = require('luasnip')
         if ls.jumpable(1) then
           ls.jump(1)
@@ -26,7 +27,7 @@ return {
       mode = { 'i', 's' }
     },
     {
-      '<C-n>',
+      '<C-c>',
       function()
         local ls = require('luasnip')
         if ls.choice_active() then
@@ -100,12 +101,13 @@ return {
       },
     }
   end,
-  init = function()
+  config = function(_, opts)
     require("luasnip.loaders.from_vscode").lazy_load()
     if Test == true then
       require("luasnip.loaders.from_lua").load({ paths = CustomBaseDir .. '/snippets' })
     else
       require("luasnip.loaders.from_lua").load({ paths = vim.fn.stdpath('config') .. '/snippets' })
     end
+    require("luasnip").setup(opts)
   end,
 }
