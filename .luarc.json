@@ -3,5 +3,12 @@
   "diagnostics.globals": [
     "Test",
     "CustomBaseDir"
-  ]
+  ],
+  "hint": {
+    "enable": true,
+    "arrayIndex": "Enable",
+    "paramName": "All",
+    "paramType": true,
+    "semicolon": "All"
+  }
 }
