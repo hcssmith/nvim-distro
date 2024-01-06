@@ -21,6 +21,10 @@ return {
         vim.keymap.set("n", "<leader>vrr", vim.lsp.buf.references, opts)
         vim.keymap.set("n", "<leader>vrn", vim.lsp.buf.rename, opts)
         vim.keymap.set("n", "<leader>vf", vim.lsp.buf.format, opts)
+        vim.keymap.set("n", "<leader>pd", function() require('lspsaga.definition'):init(1, 1) end, opts)
+        vim.keymap.set("n", "<leader>ca", function() require('lspsaga.codeaction'):code_action() end, opts)
+        vim.keymap.set("n", "<leader>o", function() require('lspsaga.symbol'):outline() end, opts)
+        vim.keymap.set("n", "K", function() require('lspsaga.hover'):render_hover_doc() end, opts)
       end
     })
 
@@ -79,6 +83,7 @@ return {
       'williamboman/mason-lspconfig.nvim',
       'williamboman/mason.nvim',
       'folke/neodev.nvim',
+      'nvimdev/lspsaga.nvim',
     },
   },
   opts = function(_, _)
@@ -122,5 +127,10 @@ return {
     require('mason').setup({})
     require("neodev").setup({})
     require('mason-lspconfig').setup(opts)
+    require("lspsaga").setup({
+      symbol_in_winbar = {
+        enable = false
+      }
+    })
   end
 }
