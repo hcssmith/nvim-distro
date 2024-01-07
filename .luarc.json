@@ -9,6 +9,6 @@
     "arrayIndex": "Enable",
     "paramName": "All",
     "paramType": true,
-    "semicolon": "All"
+    "semicolon": "Disable"
   }
 }

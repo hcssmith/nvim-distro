@@ -84,24 +84,38 @@ return {
       'williamboman/mason.nvim',
       'folke/neodev.nvim',
       'nvimdev/lspsaga.nvim',
+      {
+        'ray-x/lsp_signature.nvim',
+        opts = {}
+      }
     },
   },
   opts = function(_, _)
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
-    capabilities.textDocument.foldingRange = {
+    local default_capabilities = vim.lsp.protocol.make_client_capabilities()
+    default_capabilities.textDocument.foldingRange = {
       dynamicRegistration = false,
       lineFoldingOnly = true
     }
+    local function default_on_attach(_, bufnr)
+      require("lsp_signature").on_attach({
+        bind = true,
+        handler_opts = {
+          border = "rounded"
+        }
+      }, bufnr)
+    end
     return {
       handlers = {
         function(server_name)
           require('lspconfig')[server_name].setup({
-            capabilities = capabilities
+            capabilities = default_capabilities,
+            on_attach = default_on_attach
           })
         end,
-        lua_ls = function(server_name)
+        lua_ls = function(_)
           require('lspconfig').lua_ls.setup({
-            capabilities = capabilities,
+            capabilities = default_capabilities,
+            on_attach = default_on_attach,
             settings = {
               Lua = {
                 hint = {
@@ -109,7 +123,7 @@ return {
                   arrayIndex = 'Enable',
                   paramName = 'All',
                   paramType = true,
-                  semicolon = 'All',
+                  semicolon = 'Disable',
                   setType = true,
                 },
                 completion = {
