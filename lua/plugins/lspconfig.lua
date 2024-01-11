@@ -92,10 +92,6 @@ return {
   },
   opts = function(_, _)
     local default_capabilities = vim.lsp.protocol.make_client_capabilities()
-    default_capabilities.textDocument.foldingRange = {
-      dynamicRegistration = false,
-      lineFoldingOnly = true
-    }
     local function default_on_attach(_, bufnr)
       require("lsp_signature").on_attach({
         bind = true,

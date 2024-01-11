@@ -4,11 +4,25 @@ return {
   build = ":Neorg sync-parsers",
   dependencies = { "nvim-lua/plenary.nvim" },
   cond = HasCCompiler,
+  init = function(_)
+    local augroup = vim.api.nvim_create_augroup("NeorgAutoCommands", {})
+
+    vim.api.nvim_create_autocmd("BufReadPost", {
+      desc = 'Collapse all folds when Lsp is attached',
+      group = augroup,
+      pattern = { '*.norg' },
+      ---@param ev AutoCmdEvent
+      callback = function(ev)
+        require('ufo.main').attach(ev.buf)
+        require('ufo').closeAllFolds()
+      end
+    })
+  end,
   ft = 'norg',
   cmd = 'Neorg',
   opts = {
     load = {
-      ["core.defaults"] = {}, -- Loads default behaviour
+      ["core.defaults"] = {},  -- Loads default behaviour
       ["core.concealer"] = {}, -- Adds pretty icons to your documents
       ["core.itero"] = {},
       ["core.promo"] = {},
@@ -24,13 +38,13 @@ return {
         }
       },
       ["core.dirman"] = { -- Manages Neorg workspaces
-      config = {
-        workspaces = {
-          notes = NotesDir(),
+        config = {
+          workspaces = {
+            notes = NotesDir(),
+          },
+          default_workspace = "notes"
         },
-        default_workspace = "notes"
       },
     },
-  },
-}
   }
+}
