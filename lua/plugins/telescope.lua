@@ -18,19 +18,8 @@ return {
     { '<leader>vh', function() require('telescope.builtin').help_tags() end }
   },
   opts = function(self, opts)
-    local trouble = require("trouble.providers.telescope")
     local actions = require("telescope.actions")
     return {
-      defaults = {
-        mappings = {
-          n = {
-            ["<C-t>"] = trouble.open_with_trouble
-          },
-          i = {
-            ["<C-t>"] = trouble.open_with_trouble
-          }
-        },
-      },
       pickers = {
         find_files = {
           mappings = {
